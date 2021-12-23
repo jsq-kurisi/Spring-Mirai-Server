@@ -4,6 +4,7 @@ import net.lz1998.pbbot.bot.Bot;
 import net.lz1998.pbbot.bot.BotPlugin;
 import onebot.OnebotBase;
 import onebot.OnebotEvent;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,8 @@ public class HelloPlugin extends BotPlugin {
             OnebotBase.Message message = messageChain.get(0);
             if (message.getType().equals("text")) {
                 String text = message.getDataMap().get("text");
-                if ("hello".equals(text)) {
-                    bot.sendPrivateMsg(event.getUserId(), "hi", false);
+                if ("zpc".equals(text)) {
+                    bot.sendPrivateMsg(event.getUserId(), "傻逼", false);
                 }
             }
         }
@@ -33,8 +34,8 @@ public class HelloPlugin extends BotPlugin {
         // 这里展示了RawMessage的用法（纯String）
         long groupId = event.getGroupId();
         String text = event.getRawMessage();
-        if ("hello".equals(text)) {
-            bot.sendGroupMsg(groupId, "hi", false);
+        if (StringUtils.isNotBlank(text) && text.toLowerCase().contains("zpc")) {
+            bot.sendGroupMsg(groupId, "sb", false);
             return MESSAGE_BLOCK; // 当存在多个plugin时，不执行下一个plugin
         }
         return MESSAGE_IGNORE; // 当存在多个plugin时，继续执行下一个plugin
