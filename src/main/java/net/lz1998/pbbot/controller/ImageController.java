@@ -3,7 +3,9 @@ package net.lz1998.pbbot.controller;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,12 +61,18 @@ public class ImageController {
     @RequestMapping("test")
     public String test() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("referer", "https://www.fflogs.com");
-        ResponseEntity<String> jsonObject = restTemplate.exchange("https://www.fflogs.com/zone/statistics/table/32/dps/1050/100/8/3/100/1000/7/0/Global/Scholar/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps",
-                HttpMethod.GET,
-                new HttpEntity<String>(headers),
-                String.class);
-        System.out.println(jsonObject.getBody());
-        return jsonObject.getBody();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer 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");
+
+        JSONObject json = new JSONObject();
+        json.put("model", "code-davinci-002");
+        json.put("prompt", "你谁啊");
+        json.put("max_tokens", 4000);
+
+        HttpEntity<String> entity = new HttpEntity<>(json.toString(), headers);
+        String response = restTemplate.postForObject("https://api.openai.com/v1/completions", entity, String.class);
+        JSONObject responseJson = JSONObject.parseObject(response);
+        System.out.println(responseJson.getJSONArray("choices").getJSONObject(0).getString("text"));
+        return response;
     }
 }

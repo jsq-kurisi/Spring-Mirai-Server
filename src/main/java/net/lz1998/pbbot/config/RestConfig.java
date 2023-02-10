@@ -1,7 +1,6 @@
 package net.lz1998.pbbot.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -16,8 +15,8 @@ public class RestConfig {
     @Bean(name = "simpleClientHttpRequestFactory")
     public SimpleClientHttpRequestFactory simpleClientHttpRequestFactory() {
         SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
-        simpleClientHttpRequestFactory.setConnectTimeout(5000);
-        simpleClientHttpRequestFactory.setReadTimeout(10000);
+        simpleClientHttpRequestFactory.setConnectTimeout(60000);
+        simpleClientHttpRequestFactory.setReadTimeout(60000);
         return simpleClientHttpRequestFactory;
     }
 
