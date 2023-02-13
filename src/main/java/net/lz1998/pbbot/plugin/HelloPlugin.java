@@ -53,7 +53,7 @@ public class HelloPlugin extends BotPlugin {
             String question = text.substring(5).trim();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer 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");
+            headers.set("Authorization", "Bearer sk-UMC2bmpshpnLEfqHfZPaT3BlbkFJC8Qq0I4mDyxaqo");
 
             JSONObject json = new JSONObject();
             json.put("model", "text-davinci-003");

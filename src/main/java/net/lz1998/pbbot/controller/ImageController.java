@@ -62,7 +62,7 @@ public class ImageController {
     public String test() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer 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");
+        headers.set("Authorization", "Bearer sk-SII9fwMbRIqVyp8iszDYT3BlbkFJi");
 
         JSONObject json = new JSONObject();
         json.put("model", "code-davinci-002");
